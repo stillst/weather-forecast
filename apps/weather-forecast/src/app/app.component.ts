@@ -65,7 +65,7 @@ export class AppComponent implements OnDestroy {
 	}
 
 	onFormError(): void {
-		this.notificationService.notifyAboutError('form error');
+		this.notificationService.notifyAboutError('form error, less than 4 letter in City?');
 	}
 
 	getTableHeaderFromForecast(forecast: CurrentForecast): string[] {

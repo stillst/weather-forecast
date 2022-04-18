@@ -20,8 +20,10 @@ export class WeatherForecastStoreService {
 	forecastCity$: Observable<string>;
 	forecast$: Observable<CurrentForecast>;
 
-	private _forecastPeriod$: BehaviorSubject<string> = new BehaviorSubject('');
-	private _forecastCity$: BehaviorSubject<string> = new BehaviorSubject('');
+	private _forecastPeriod$: BehaviorSubject<ForecastPeriod> = new BehaviorSubject<ForecastPeriod>(
+		ForecastPeriod.daily
+	);
+	private _forecastCity$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
 	private _apiMap = new Map([
 		[ForecastPeriod.daily, this.getDailyTemperature],
@@ -92,7 +94,9 @@ export class WeatherForecastStoreService {
 			.getHourlyForecast(lat, lon)
 			.pipe(
 				map((forecast: HourlyForecast[] | string) =>
-					this.isCorrectResponse<HourlyForecast[]>(forecast) ? this.formatHourlyTemperature(forecast) : forecast
+					this.isCorrectResponse<HourlyForecast[]>(forecast)
+						? this.formatHourlyTemperature(forecast)
+						: forecast
 				)
 			);
 	}
