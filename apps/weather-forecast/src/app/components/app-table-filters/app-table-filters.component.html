@@ -1,0 +1,7 @@
+<form [formGroup]="forecastForm" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="text" required>
+  <select formControlName="select" (change)="onSelectChange()">
+    <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+  </select>
+  <button type="submit">Search</button>
+</form>
